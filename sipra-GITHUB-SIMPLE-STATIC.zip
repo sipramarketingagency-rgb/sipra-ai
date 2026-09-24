@@ -1,0 +1,1241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIPRA AI Social Workforce | Your AI Social Media Team — Working 24/7</title>
+  <meta name="description" content="SIPRA AI Social Workforce — Deploy specialized AI employees 24/7 for social media strategy, multi-platform publishing, inbox management, and lead generation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/original.css">
+  <style>
+    body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:#09090b;color:#fafafa;overflow-x:hidden}
+    .font-mono{font-family:"JetBrains Mono",monospace}
+    .animate-spin-slow{animation:spin 3s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .glass{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+    ::-webkit-scrollbar{width:6px;height:6px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:rgba(161,161,170,.3);border-radius:9999px}
+    .white-label-hidden{display:none!important}
+  </style>
+</head>
+<body class="min-h-screen bg-zinc-950 text-zinc-100 selection:bg-indigo-500 selection:text-white">
+  <!-- AUTH MODAL -->
+  <div id="authModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+    <div class="relative w-full max-w-md rounded-[20px] bg-zinc-900 border border-zinc-800 shadow-2xl overflow-hidden">
+      <div class="p-8">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold">S</div>
+          <div><div class="text-sm font-bold text-white">SIPRA</div><div class="text-[10px] font-mono text-zinc-500">AI SOCIAL WORKFORCE</div></div>
+          <span class="ml-auto px-2.5 py-1 rounded-full bg-emerald-950/50 border border-emerald-800/50 text-[10px] font-mono text-emerald-300">Secure Auth</span>
+        </div>
+
+        <div class="flex gap-2 p-1 rounded-xl bg-zinc-950 border border-zinc-800 mb-6">
+          <button id="authTabLogin" onclick="switchAuthTab('login')" class="flex-1 py-2.5 rounded-lg bg-zinc-800 text-white text-sm font-medium">Login</button>
+          <button id="authTabRegister" onclick="switchAuthTab('register')" class="flex-1 py-2.5 rounded-lg text-zinc-400 text-sm font-medium">Register</button>
+        </div>
+
+        <div id="authLoginForm" class="space-y-4">
+          <div>
+            <label class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-1.5 block">Email</label>
+            <input id="loginEmail" type="email" placeholder="farrukhzulfiqarahmed13@gmail.com" class="w-full px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 outline-none focus:border-indigo-500 transition"/>
+          </div>
+          <div>
+            <label class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-1.5 block">Password</label>
+            <input id="loginPassword" type="password" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 outline-none focus:border-indigo-500 transition"/>
+          </div>
+          <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-900/50 text-[11px] text-indigo-300">
+            <div class="font-medium text-white mb-1">Demo Accounts (Seeded):</div>
+            <div>Owner: farrukhzulfiqarahmed13@gmail.com / Sipra@2026!</div>
+            <div>Admin: admin@sipra.marketing / Admin@123</div>
+            <div>Client: rachel@vancescale.com / Client@123</div>
+          </div>
+          <button onclick="doLogin()" class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/20 transition">Sign In →</button>
+          <div id="loginError" class="hidden p-3 rounded-xl bg-red-950/50 border border-red-900/50 text-xs text-red-300"></div>
+        </div>
+
+        <div id="authRegisterForm" class="hidden space-y-4">
+          <div>
+            <label class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-1.5 block">Full Name</label>
+            <input id="regName" type="text" placeholder="Farrukh Zulfiqar Ahmed" class="w-full px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 outline-none focus:border-indigo-500 transition"/>
+          </div>
+          <div>
+            <label class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-1.5 block">Email</label>
+            <input id="regEmail" type="email" placeholder="you@agency.com" class="w-full px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 outline-none focus:border-indigo-500 transition"/>
+          </div>
+          <div>
+            <label class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-1.5 block">Password</label>
+            <input id="regPassword" type="password" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 outline-none focus:border-indigo-500 transition"/>
+          </div>
+          <div id="inviteInfo" class="hidden p-3 rounded-xl bg-amber-950/30 border border-amber-900/50 text-xs text-amber-200"></div>
+          <button onclick="doRegister()" class="w-full py-3.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-900 text-sm font-semibold transition">Create Account →</button>
+          <div id="regError" class="hidden p-3 rounded-xl bg-red-950/50 border border-red-900/50 text-xs text-red-300"></div>
+        </div>
+
+        <div class="mt-6 pt-6 border-t border-zinc-800 text-center">
+          <div class="text-[11px] text-zinc-500">Protected by Brand DNA Guardrails · 99.8% Uptime · Multi-Tenant Isolation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LANDING VIEW -->
+  <div id="landingView" class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-40 w-full border-b border-zinc-900 bg-zinc-950/80 glass">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div id="landingLogo" class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">S</div>
+          <div class="flex flex-col sipra-branding">
+            <span class="text-sm font-bold tracking-tight text-white leading-none">SIPRA</span>
+            <span class="text-[10px] font-mono text-zinc-400 tracking-wider leading-none mt-0.5">AI SOCIAL WORKFORCE</span>
+          </div>
+          <span class="hidden md:inline-flex ml-4 items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-950/50 border border-emerald-800/50 text-[10px] font-mono text-emerald-300">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>Live 24/7
+          </span>
+          <span id="tenantBadge" class="hidden ml-2 items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-zinc-400"></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="openSearch()" class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 hover:text-zinc-200 transition">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <span>Search</span>
+            <span class="ml-2 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px]">⌘K</span>
+          </button>
+          <div id="authButtons" class="flex items-center gap-2">
+            <button onclick="openAuth('login')" class="px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-200 rounded-xl text-xs font-semibold transition">Sign In</button>
+            <button onclick="openAuth('register')" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold shadow-lg shadow-indigo-600/20 transition">Get Started</button>
+          </div>
+          <div id="userMenu" class="hidden items-center gap-3">
+            <div id="tenantSwitcher" class="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 cursor-pointer hover:bg-zinc-800 transition" onclick="openTenantSwitcher()">
+              <span class="w-6 h-6 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-[10px] font-bold" id="currentTenantLogo">S</span>
+              <span id="currentTenantName">SIPRA Global</span>
+              <svg class="w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <img id="userAvatar" src="" class="w-8 h-8 rounded-xl object-cover border border-zinc-800"/>
+            <button onclick="doLogout()" class="w-8 h-8 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center overflow-hidden">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-950/80 border border-indigo-800/60 text-indigo-300 text-xs font-mono font-medium mb-8">
+          <svg class="w-3.5 h-3.5 text-indigo-400 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Next-Generation Autonomous Marketing SaaS · Multi-Tenant + Auth</span>
+        </div>
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white max-w-4xl mx-auto leading-[1.1]">
+          The Autonomous <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-indigo-500">AI Social Media</span> Workforce
+        </h1>
+        <p class="mt-6 text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+          Deploy 24/7 digital employees for platform-native content creation, omni-channel scheduling, inbox response triage, lead scoring, and <span class="text-white font-medium">multi-tenant agency client management with white-label portals</span>.
+        </p>
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <button onclick="handleLaunchDashboard()" class="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-semibold flex items-center gap-2 shadow-xl shadow-indigo-600/30 transition-all hover:scale-102">
+            Launch Unified Dashboard
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </button>
+          <button onclick="openOnboarding()" class="px-6 py-3.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-200 rounded-xl text-sm font-semibold flex items-center gap-2 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Run 7-Step Onboarding Wizard
+          </button>
+        </div>
+        <div class="mt-8 p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800 max-w-2xl mx-auto text-left">
+          <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">🔐 Auth + Multi-Tenant Features Added</div>
+          <div class="grid grid-cols-2 gap-2 text-xs text-zinc-400">
+            <div class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-emerald-400"></span> JWT + Session Auth</div>
+            <div class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-emerald-400"></span> 6 Tenants + 21 Workspaces</div>
+            <div class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-emerald-400"></span> White-Label Portals /portal/:slug</div>
+            <div class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-emerald-400"></span> Custom Domains + Colors</div>
+            <div class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-emerald-400"></span> Client Invites + Roles</div>
+            <div class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-emerald-400"></span> Tenant Isolation + Audit Logs</div>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-zinc-800/60 flex flex-wrap items-center justify-center gap-8 text-xs text-zinc-400">
+          <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span> Powered by Gemini 3.8 Flash</span>
+          <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span> Multi-Tenant Agency Portals</span>
+          <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span> Human-in-the-Loop Governance</span>
+          <span class="flex items-center gap-1.5"><span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span> Inbound CRM Lead Pipeline</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pb-16">
+      <div class="rounded-[20px] border border-zinc-800 bg-zinc-900/50 p-2 sm:p-3 shadow-2xl">
+        <div class="rounded-[14px] overflow-hidden border border-zinc-800 bg-zinc-950">
+          <div class="h-12 border-b border-zinc-800 bg-zinc-950 flex items-center justify-between px-4">
+            <div class="flex items-center gap-2 text-xs font-mono text-zinc-500">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live 24/7 Digital Operations · SIPRA Global (Master Workspace) · <span id="previewDbStats" class="text-zinc-400">DB Synced</span> · <span id="previewTenantInfo" class="text-indigo-400">Multi-Tenant</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <div class="w-3 h-3 rounded-full bg-zinc-800"></div>
+              <div class="w-3 h-3 rounded-full bg-zinc-800"></div>
+              <div class="w-3 h-3 rounded-full bg-zinc-800"></div>
+            </div>
+          </div>
+          <div class="p-6 sm:p-8 bg-[#09090b]">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8">
+              <div>
+                <h2 class="text-2xl font-bold text-white">Good morning, <span id="previewUserName">Farrukh</span>.</h2>
+                <p class="text-sm text-zinc-400 mt-1"><span class="text-white font-medium">Your AI workforce is ready.</span> <span id="previewWorkforceText">8 digital employees are active</span>, monitoring conversations, preparing platform-native content, and converting comment signals into qualified CRM leads.</p>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="openSearch()" class="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-300">Ask Your AI Workforce</button>
+                <button onclick="handleLaunchDashboard()" class="px-4 py-2 rounded-xl bg-white text-zinc-950 text-xs font-semibold">Create Content</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
+                <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">Content Pipeline</div>
+                <div class="text-2xl font-bold text-white"><span id="statTotalPosts">0</span><span class="text-sm font-normal text-zinc-500 ml-1">total posts</span></div>
+                <div class="mt-3 flex gap-2 text-[11px]">
+                  <span class="px-2 py-1 rounded-full bg-zinc-800 text-zinc-300">Scheduled: <b id="statScheduled">0</b></span>
+                  <span class="px-2 py-1 rounded-full bg-zinc-800 text-zinc-300">Published: <b id="statPublished">0</b></span>
+                  <span class="px-2 py-1 rounded-full bg-amber-950/50 border border-amber-900/50 text-amber-300">Pending: <b id="statPending">0</b></span>
+                </div>
+              </div>
+              <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
+                <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2 flex justify-between">Social Growth <span class="text-emerald-400">+18.4% 30d Velocity</span></div>
+                <div class="text-2xl font-bold text-white">+12.4%<span class="text-sm font-normal text-zinc-500 ml-1">Followers</span></div>
+                <div class="mt-1 text-xs text-zinc-400">Engagement: <span class="text-white font-medium">+8.7%</span></div>
+                <div class="mt-3 h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden"><div class="h-full w-[72%] bg-indigo-500 rounded-full"></div></div>
+              </div>
+              <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
+                <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2 flex justify-between">Inbound Leads <span class="text-zinc-400"><span id="statSignals">4</span> signals captured</span></div>
+                <div class="text-2xl font-bold text-white"><span id="statNewLeads">0</span><span class="text-sm font-normal text-zinc-500 ml-1">New</span></div>
+                <div class="mt-1 text-xs text-zinc-400">Qualified: <span class="text-emerald-400 font-medium" id="statQualified">0</span></div>
+                <div class="mt-3 flex gap-1"><div class="h-1.5 w-8 bg-emerald-500 rounded-full"></div><div class="h-1.5 w-8 bg-zinc-700 rounded-full"></div><div class="h-1.5 w-8 bg-zinc-700 rounded-full"></div></div>
+              </div>
+              <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
+                <div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">AI Workforce</div>
+                <div class="text-2xl font-bold text-white"><span id="statActiveEmp">0</span><span class="text-sm font-normal text-zinc-500 ml-1">employees active</span></div>
+                <div class="mt-1 text-xs text-zinc-400">Tasks completed: <span class="text-white font-medium" id="statTasks">0</span> 99.8% Uptime</div>
+                <div class="mt-3 flex -space-x-2" id="previewAvatars"></div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <div class="lg:col-span-8">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold text-white">Active AI Employees</h3>
+                  <span class="text-xs text-zinc-500 font-mono hidden sm:inline">Autonomous specialists · employees table</span>
+                  <button onclick="handleLaunchDashboard()" class="text-xs text-indigo-400">View All 10 Employees</button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="previewEmployeesGrid"></div>
+              </div>
+              <div class="lg:col-span-4 space-y-4">
+                <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
+                  <div class="text-xs font-mono text-zinc-500 mb-3">Try: "Create next week's LinkedIn and Instagram content for my business"</div>
+                  <div class="text-[11px] text-zinc-400 mb-3">Orchestrates Sarah Chen and Alex Rivera to generate 5 multi-platform drafts.</div>
+                  <button onclick="handleLaunchDashboard()" class="w-full py-2 rounded-xl bg-indigo-600 text-white text-xs font-medium">Run Prompt</button>
+                  <div class="mt-4 pt-4 border-t border-zinc-800" id="previewApproval"></div>
+                </div>
+                <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
+                  <div class="text-xs font-semibold text-white mb-3">Recent High-Intent Leads <span class="text-[10px] font-mono text-zinc-500 ml-2">leads table · 19 records</span></div>
+                  <div class="space-y-3" id="previewLeads"></div>
+                </div>
+                <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
+                  <div class="text-xs font-semibold text-white mb-3">Multi-Tenant Agencies <span class="text-[10px] font-mono text-zinc-500">6 tenants · white-label</span></div>
+                  <div class="space-y-2" id="previewTenants"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-auto border-t border-zinc-900 py-10 px-4 text-center text-xs text-zinc-500 space-y-2">
+      <div class="sipra-branding">SIPRA AI Social Workforce · Developed for SIPRA Marketing & Business Development Services</div>
+      <div>Lead Developer: Farrukh Zulfiqar Ahmed (<a href="mailto:farrukhzulfiqarahmed13@gmail.com" class="text-indigo-400 hover:underline">farrukhzulfiqarahmed13@gmail.com</a>) · DB: SQLite <code class="px-1 py-0.5 rounded bg-zinc-900 border border-zinc-800">sipra.db</code> · Backend: Flask + SQLAlchemy · Auth + Multi-Tenant v2.0</div>
+      <div class="pt-2 text-zinc-600">© 2026 SIPRA Marketing. All rights reserved. | <a href="/api/health" target="_blank" class="text-zinc-500 hover:text-zinc-300 underline">API Health</a> · <a href="/api/tenants" target="_blank" class="text-zinc-500 hover:text-zinc-300 underline">/api/tenants</a></div>
+    </footer>
+  </div>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="dashboardView" class="hidden min-h-screen bg-zinc-950 text-zinc-100 flex-col">
+    <header class="h-16 border-b border-zinc-900 bg-zinc-950 flex items-center justify-between px-4 lg:px-6 shrink-0 sticky top-0 z-30">
+      <div class="flex items-center gap-4">
+        <button onclick="showLanding()" id="dashLogo" class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">S</button>
+        <div class="hidden md:flex items-center gap-2 text-xs font-mono text-zinc-500">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="dashTopTenant">Live 24/7 Digital Operations · SIPRA Global (Master Workspace)</span>
+        </div>
+        <div class="md:hidden text-xs font-bold text-white" id="dashMobileTitle">SIPRA</div>
+        <span id="dashboardDbIndicator" class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-emerald-300"><span class="w-1 h-1 rounded-full bg-emerald-400"></span>DB Connected</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div id="dashTenantSwitcher" class="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 cursor-pointer hover:bg-zinc-800 transition" onclick="openTenantSwitcher()">
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-[10px] font-bold" id="dashCurrentTenantLogo" style="background:#4f46e5">S</span>
+          <span id="dashCurrentTenantName">SIPRA Global</span>
+          <svg class="w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <button onclick="openSearch()" class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          Search <span class="ml-1 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px]">⌘K</span>
+        </button>
+        <img id="dashUserAvatar" src="" class="w-8 h-8 rounded-xl object-cover border border-zinc-800"/>
+        <button onclick="doLogout()" class="w-8 h-8 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden">
+      <aside class="w-[260px] hidden lg:flex flex-col border-r border-zinc-900 bg-zinc-950 overflow-y-auto">
+        <div class="p-4 space-y-6">
+          <div>
+            <div class="text-[10px] font-mono font-semibold tracking-widest text-zinc-500 uppercase mb-2 px-2">Command</div>
+            <nav class="space-y-1">
+              <a href="#" onclick="switchTab('dashboard')" data-tab="dashboard" class="tab-link flex items-center gap-3 px-3 py-2.5 rounded-xl bg-zinc-900 text-white text-sm font-medium"><svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>Dashboard</a>
+              <a href="#" onclick="switchTab('workforce')" data-tab="workforce" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 text-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>AI Workforce <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400" id="navWorkforceCount">10</span></a>
+              <a href="#" onclick="switchTab('studio')" data-tab="studio" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 text-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>Content Studio</a>
+              <a href="#" onclick="switchTab('repurpose')" data-tab="repurpose" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200 text-sm">Repurpose Engine</a>
+            </nav>
+          </div>
+          <div>
+            <div class="text-[10px] font-mono font-semibold tracking-widest text-zinc-500 uppercase mb-2 px-2">Operations</div>
+            <nav class="space-y-1">
+              <a href="#" onclick="switchTab('calendar')" data-tab="calendar" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Calendar</a>
+              <a href="#" onclick="switchTab('approvals')" data-tab="approvals" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Approvals <span class="ml-auto w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center text-[10px]" id="navApprovalCount">1</span></a>
+              <a href="#" onclick="switchTab('social')" data-tab="social" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm">Social Accounts <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-zinc-800">8</span></a>
+              <a href="#" onclick="switchTab('inbox')" data-tab="inbox" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm">Inbox</a>
+              <a href="#" onclick="switchTab('leads')" data-tab="leads" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl bg-zinc-900/50 border border-zinc-800 text-zinc-200 text-sm"><svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>Leads CRM <span class="ml-auto px-1.5 py-0.5 rounded bg-emerald-950 border border-emerald-800 text-emerald-300 text-[10px]" id="navLeadsCount">19 NEW</span></a>
+              <a href="#" onclick="switchTab('automations')" data-tab="automations" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm">Automations</a>
+            </nav>
+          </div>
+          <div>
+            <div class="text-[10px] font-mono font-semibold tracking-widest text-zinc-500 uppercase mb-2 px-2">Agency / White-Label</div>
+            <nav class="space-y-1">
+              <a href="#" onclick="switchTab('agency')" data-tab="agency" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm border border-indigo-900/30 bg-indigo-950/20"><svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>Agency Hub <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-indigo-600 text-white" id="navAgencyCount">6</span></a>
+              <a href="#" onclick="switchTab('workspaces')" data-tab="workspaces" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm">Workspaces <span class="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-zinc-800" id="navWorkspaceCount">21</span></a>
+              <a href="#" onclick="switchTab('clients')" data-tab="clients" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm">Client Users</a>
+              <a href="#" onclick="switchTab('invites')" data-tab="invites" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm">Invitations</a>
+              <a href="#" onclick="switchTab('brand')" data-tab="brand" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm">Brand DNA</a>
+              <a href="#" onclick="switchTab('analytics')" data-tab="analytics" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm">Analytics</a>
+            </nav>
+          </div>
+          <div>
+            <div class="text-[10px] font-mono font-semibold tracking-widest text-zinc-500 uppercase mb-2 px-2">System</div>
+            <nav class="space-y-1">
+              <a href="#" onclick="switchTab('audit')" data-tab="audit" class="tab-link flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm">Audit Logs</a>
+              <a href="#" onclick="showLanding()" class="flex items-center gap-3 px-3 py-2 rounded-xl text-zinc-400 hover:bg-zinc-900 text-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Back to Site</a>
+            </nav>
+          </div>
+        </div>
+        <div class="mt-auto p-4 border-t border-zinc-900">
+          <div class="p-3 rounded-xl bg-indigo-950/40 border border-indigo-900/50">
+            <div class="text-xs font-semibold text-white flex items-center justify-between"><span id="sidebarTenantName">SIPRA Pro Plan</span><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span></div>
+            <div class="text-[11px] text-indigo-300 mt-1"><span id="sidebarActiveCount">8</span>/10 AI employees active · <span id="sidebarWorkspaceCount">21</span> workspaces</div>
+            <div class="mt-2 h-1.5 bg-indigo-950 rounded-full overflow-hidden"><div class="h-full w-[80%] bg-indigo-500 rounded-full"></div></div>
+            <div class="mt-2 text-[10px] font-mono text-indigo-400">Tenant: <span id="sidebarTenantSlug">sipra-global</span> · <span id="sidebarUserRole">owner</span></div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-[#09090b]">
+        <div class="max-w-7xl mx-auto">
+          <div id="tab-dashboard" class="tab-content">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8">
+              <div>
+                <h1 class="text-2xl font-bold text-white">Good morning, <span id="dashUserName">Farrukh</span>.</h1>
+                <p class="text-sm text-zinc-400 mt-1"><span class="text-white font-medium">Your AI workforce is ready.</span> <span id="dashWorkforceText">8 digital employees are active</span> in <span id="dashTenantName" class="text-indigo-400 font-medium">SIPRA Global</span>. <span class="text-[11px] font-mono px-2 py-1 rounded bg-zinc-900 border border-zinc-800 ml-2">Tenant: <span id="dashTenantSlug">sipra-global</span> · DB: <span id="dashDbCount">0</span> records</span></p>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="openSearch()" class="px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-300 hover:bg-zinc-800 transition">Ask Your AI Workforce</button>
+                <button onclick="switchTab('studio')" class="px-4 py-2.5 rounded-xl bg-white text-zinc-950 text-xs font-semibold hover:bg-zinc-100 transition">Create Content</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+                <div class="flex justify-between items-start mb-2"><div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">Content Pipeline</div><span class="w-6 h-6 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span></div>
+                <div class="text-3xl font-bold text-white"><span id="dashTotalPosts">0</span><span class="text-sm font-normal text-zinc-500 ml-2">total posts</span></div>
+                <div class="mt-4 flex gap-2 text-[11px] font-mono"><span class="px-2.5 py-1 rounded-full bg-zinc-800 text-zinc-300">Scheduled: <b class="text-white" id="dashScheduled">0</b></span><span class="px-2.5 py-1 rounded-full bg-zinc-800 text-zinc-300">Published: <b class="text-white" id="dashPublished">0</b></span><span class="px-2.5 py-1 rounded-full bg-amber-950/50 border border-amber-900/50 text-amber-300">Pending: <b id="dashPending">0</b></span></div>
+              </div>
+              <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+                <div class="flex justify-between items-start mb-2"><div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">Social Growth</div><span class="text-[11px] px-2 py-1 rounded-full bg-emerald-950/50 border border-emerald-800/50 text-emerald-400 font-mono">+18.4% 30d Velocity</span></div>
+                <div class="text-3xl font-bold text-white">+12.4%<span class="text-sm font-normal text-zinc-500 ml-2">Followers</span></div>
+                <div class="mt-2 text-xs text-zinc-400">Engagement: <span class="text-white font-medium">+8.7%</span> · Reach +22%</div>
+                <div class="mt-4 h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden"><div class="h-full w-[72%] bg-gradient-to-r from-indigo-500 to-purple-400 rounded-full"></div></div>
+              </div>
+              <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+                <div class="flex justify-between items-start mb-2"><div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">Inbound Leads</div><span class="text-[11px] text-zinc-400"><span id="dashSignals">4</span> signals captured</span></div>
+                <div class="text-3xl font-bold text-white"><span id="dashNewLeads">0</span><span class="text-sm font-normal text-zinc-500 ml-2">New</span></div>
+                <div class="mt-2 text-xs text-zinc-400">Qualified: <span class="text-emerald-400 font-medium" id="dashQualified">0</span> · Proposal <span id="dashProposal">0</span></div>
+                <div class="mt-4 flex gap-1"><div class="h-1.5 w-12 bg-emerald-500 rounded-full"></div><div class="h-1.5 w-8 bg-zinc-700 rounded-full"></div><div class="h-1.5 w-8 bg-zinc-700 rounded-full"></div></div>
+              </div>
+              <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+                <div class="flex justify-between items-start mb-2"><div class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">AI Workforce</div><span class="w-6 h-6 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span></div>
+                <div class="text-3xl font-bold text-white"><span id="dashActiveEmp">0</span><span class="text-sm font-normal text-zinc-500 ml-2">employees active</span></div>
+                <div class="mt-2 text-xs text-zinc-400">Tasks completed: <span class="text-white font-medium" id="dashTasks">0</span> · 99.8% Uptime</div>
+                <div class="mt-4 flex -space-x-2" id="dashAvatars"></div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <div class="lg:col-span-8">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold text-white text-sm">Active AI Employees <span class="text-[11px] font-mono text-zinc-500 ml-2">employees table · 10 records</span></h3>
+                  <button onclick="switchTab('workforce')" class="text-xs text-indigo-400 hover:text-indigo-300">View All 10 Employees</button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="dashEmployeesGrid"></div>
+              </div>
+              <div class="lg:col-span-4 space-y-4">
+                <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+                  <div class="text-[11px] font-mono text-zinc-500 mb-2 px-2.5 py-1 rounded-full bg-zinc-800/50 border border-zinc-700/50 inline-block">Try: "Create next week's LinkedIn and Instagram content for my business"</div>
+                  <div class="text-[11px] text-zinc-500 mb-3">Orchestrates Sarah Chen and Alex Rivera to generate 5 multi-platform drafts.</div>
+                  <button onclick="runPrompt()" class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition">Run Prompt</button>
+                  <div class="mt-5 pt-5 border-t border-zinc-800" id="dashApprovalSection"></div>
+                </div>
+                <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+                  <div class="flex items-center justify-between mb-4"><div class="text-sm font-semibold text-white">Recent High-Intent Leads</div><span class="text-[11px] text-zinc-500 font-mono">leads table</span></div>
+                  <div class="space-y-3" id="dashLeadsList"></div>
+                  <button onclick="switchTab('leads')" class="w-full mt-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-medium transition">View All Leads →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="tab-workforce" class="tab-content hidden"><h2 class="text-xl font-bold text-white mb-2">AI Workforce <span class="text-xs font-mono text-zinc-500">employees table · 10 records</span></h2><p class="text-sm text-zinc-400 mb-6">Autonomous specialists configured with Brand DNA guardrails, memory, and specialized toolsets.</p><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="workforceGrid"></div></div>
+
+          <div id="tab-studio" class="tab-content hidden">
+            <div class="flex justify-between items-center mb-6"><div><h2 class="text-xl font-bold text-white">Content Studio <span class="text-xs font-mono text-zinc-500">content_posts table · tenant isolated</span></h2><p class="text-sm text-zinc-400">Create and manage platform-native content — filtered by <span id="studioTenantName" class="text-indigo-400">current tenant</span></p></div><button onclick="createPost()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-medium">+ New Post</button></div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6"><div class="lg:col-span-8"><div class="space-y-3" id="studioPostsList"></div></div><div class="lg:col-span-4"><div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800"><h3 class="text-sm font-semibold text-white mb-3">Create New Post</h3><input id="newPostTitle" placeholder="Post title..." class="w-full px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white placeholder:text-zinc-500 outline-none focus:border-indigo-500 mb-3"/><textarea id="newPostContent" placeholder="Content..." rows="4" class="w-full px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white placeholder:text-zinc-500 outline-none focus:border-indigo-500 mb-3"></textarea><select id="newPostPlatform" class="w-full px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white mb-3"><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="x">X (Twitter)</option><option value="facebook">Facebook</option></select><select id="newPostWorkspace" class="w-full px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white mb-3"><option value="">Select Workspace (optional)</option></select><button onclick="createPost()" class="w-full py-2.5 rounded-xl bg-white text-zinc-900 text-sm font-semibold">Create Draft</button></div></div></div>
+          </div>
+
+          <div id="tab-repurpose" class="tab-content hidden"><h2 class="text-xl font-bold text-white mb-2">Repurpose Engine <span class="text-xs font-mono text-zinc-500">POST /api/repurpose · 1 to 15</span></h2><p class="text-sm text-zinc-400 mb-6">Feed 1 blog post or transcript. Get 15 platform-native assets.</p><div class="grid grid-cols-1 lg:grid-cols-12 gap-6"><div class="lg:col-span-5"><div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800"><textarea id="repurposeSource" placeholder="Paste your blog post, transcript, or long-form content here..." rows="10" class="w-full px-3 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white placeholder:text-zinc-500 outline-none focus:border-indigo-500"></textarea><button onclick="runRepurpose()" class="w-full mt-3 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold">Repurpose to 15 Assets →</button></div></div><div class="lg:col-span-7"><div id="repurposeResult" class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 min-h-[300px] flex items-center justify-center text-zinc-500 text-sm">Results will appear here...</div></div></div></div>
+
+          <div id="tab-leads" class="tab-content hidden"><div class="flex justify-between items-center mb-6"><div><h2 class="text-xl font-bold text-white">Leads CRM <span class="text-xs font-mono text-zinc-500">leads table · tenant isolated</span></h2><p class="text-sm text-zinc-400">Scored buying signals from comments, DMs, mentions — filtered by <span id="leadsTenantName" class="text-indigo-400">current tenant</span></p></div><div class="flex gap-2"><select id="leadsFilter" onchange="loadLeads()" class="px-3 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-white"><option value="">All Status</option><option value="new">New</option><option value="qualified">Qualified</option><option value="proposal">Proposal</option><option value="contacted">Contacted</option></select></div></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="leadsGrid"></div></div>
+
+          <div id="tab-agency" class="tab-content hidden">
+            <div class="flex justify-between items-center mb-6"><div><h2 class="text-xl font-bold text-white">Agency Hub — Multi-Tenant Management <span class="text-xs font-mono text-zinc-500">agency_clients table · 6 tenants · white-label portals</span></h2><p class="text-sm text-zinc-400">Manage 50+ client workspaces with custom domains, bespoke color schemes, and isolated client review portals. Each tenant gets /portal/:slug white-label URL.</p></div><button onclick="openCreateTenantModal()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold">+ New Client Workspace</button></div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <div class="lg:col-span-8"><div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="agencyGrid"></div></div>
+              <div class="lg:col-span-4 space-y-4">
+                <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800"><h3 class="text-sm font-semibold text-white mb-3">White-Label Portal Features</h3><div class="space-y-3 text-xs text-zinc-400"><div class="flex gap-2"><span class="text-emerald-400">✓</span> Custom domain: portal.client.com</div><div class="flex gap-2"><span class="text-emerald-400">✓</span> Bespoke colors & logo</div><div class="flex gap-2"><span class="text-emerald-400">✓</span> Hide SIPRA branding toggle</div><div class="flex gap-2"><span class="text-emerald-400">✓</span> Isolated client review portal</div><div class="flex gap-2"><span class="text-emerald-400">✓</span> Client users & role-based access</div><div class="flex gap-2"><span class="text-emerald-400">✓</span> 21 workspaces across 6 tenants</div></div><div class="mt-4 p-3 rounded-xl bg-indigo-950/30 border border-indigo-900/50 text-[11px] text-indigo-300">Each tenant: /portal/:slug<br/>Custom: https://portal.client.com<br/>Header: X-Tenant-Slug: slug<br/>Query: ?tenant=slug</div></div>
+                <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800"><h3 class="text-sm font-semibold text-white mb-3">Tenant Isolation</h3><div class="text-xs text-zinc-400">All tables have client_id FK. Queries auto-filter by X-Tenant-Slug header or ?tenant= query or logged-in user's client_id. Owner sees all, client users see only their tenant.</div><div class="mt-3 text-[11px] font-mono text-zinc-500">Tables: content_posts, leads, approvals, social_accounts, inbox_messages, brand_dna, media_library, automations, analytics — all tenant-aware</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="tab-workspaces" class="tab-content hidden"><div class="flex justify-between items-center mb-6"><div><h2 class="text-xl font-bold text-white">Workspaces <span class="text-xs font-mono text-zinc-500">workspaces table · 21 records · per tenant</span></h2><p class="text-sm text-zinc-400">Isolated workspaces per client — each with own posts, leads, approvals</p></div><button onclick="openCreateWorkspaceModal()" class="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-white text-sm">+ New Workspace</button></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="workspacesGrid"></div></div>
+
+          <div id="tab-clients" class="tab-content hidden"><h2 class="text-xl font-bold text-white mb-2">Client Users <span class="text-xs font-mono text-zinc-500">users table · client_id FK · role-based</span></h2><p class="text-sm text-zinc-400 mb-6">Users belonging to tenants — agency_owner, client_admin, client_user roles with tenant isolation</p><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="clientUsersGrid"></div></div>
+
+          <div id="tab-invites" class="tab-content hidden"><div class="flex justify-between items-center mb-6"><div><h2 class="text-xl font-bold text-white">Invitations <span class="text-xs font-mono text-zinc-500">invitations table · token-based</span></h2><p class="text-sm text-zinc-400">Invite client users via email with role and expiring token link /invite/:token</p></div><button onclick="openInviteModal()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm">+ Invite User</button></div><div class="space-y-3" id="invitesGrid"></div></div>
+
+          <div id="tab-calendar" class="tab-content hidden"><h2 class="text-xl font-bold text-white">Content Calendar <span class="text-xs font-mono text-zinc-500">content_posts.scheduled_at · tenant isolated</span></h2><p class="text-zinc-400 text-sm mt-2">Calendar view from content_posts scheduled_at — filtered by current tenant</p><div id="calendarGrid" class="mt-6 grid grid-cols-7 gap-2"></div></div>
+          <div id="tab-approvals" class="tab-content hidden"><h2 class="text-xl font-bold text-white">Approvals <span class="text-xs font-mono text-zinc-500">approvals table · tenant isolated · client review portal</span></h2><div id="approvalsGrid" class="mt-6 space-y-3"></div></div>
+          <div id="tab-social" class="tab-content hidden"><h2 class="text-xl font-bold text-white">Social Accounts <span class="text-xs font-mono text-zinc-500">social_accounts table · 8 global + 2 per tenant</span></h2><div id="socialGrid" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4"></div></div>
+          <div id="tab-inbox" class="tab-content hidden"><h2 class="text-xl font-bold text-white">Inbox <span class="text-xs font-mono text-zinc-500">inbox_messages table · tenant isolated</span></h2><div id="inboxGrid" class="mt-6 space-y-3"></div></div>
+          <div id="tab-automations" class="tab-content hidden"><h2 class="text-xl font-bold text-white">Automations <span class="text-xs font-mono text-zinc-500">automations table · tenant isolated</span></h2><div id="automationsGrid" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4"></div></div>
+          <div id="tab-brand" class="tab-content hidden"><h2 class="text-xl font-bold text-white">Brand DNA <span class="text-xs font-mono text-zinc-500">brand_dna table · global + per tenant custom</span></h2><div id="brandGrid" class="mt-6 space-y-3"></div></div>
+          <div id="tab-analytics" class="tab-content hidden"><h2 class="text-xl font-bold text-white">Analytics <span class="text-xs font-mono text-zinc-500">analytics table · tenant isolated · 30 days</span></h2><div id="analyticsGrid" class="mt-6 p-6 rounded-2xl bg-zinc-900 border border-zinc-800 text-sm text-zinc-400">Analytics chart from /api/analytics?tenant=current — filtered per tenant</div></div>
+          <div id="tab-audit" class="tab-content hidden"><h2 class="text-xl font-bold text-white">Audit Logs <span class="text-xs font-mono text-zinc-500">audit_logs table · owner/admin only</span></h2><p class="text-sm text-zinc-400 mb-6">All actions logged: login, create, update, delete, invite, run, repurpose — with user_id, client_id, IP</p><div id="auditGrid" class="space-y-2"></div></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- TENANT SWITCHER MODAL -->
+  <div id="tenantSwitcherModal" class="hidden fixed inset-0 z-50 flex items-start justify-center pt-[20vh] px-4">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeTenantSwitcher()"></div>
+    <div class="relative w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl overflow-hidden">
+      <div class="p-5 border-b border-zinc-800"><h3 class="text-sm font-semibold text-white">Switch Workspace / Tenant</h3><p class="text-xs text-zinc-500 mt-1">Multi-tenant isolation — X-Tenant-Slug header or ?tenant=slug</p></div>
+      <div class="p-2 max-h-80 overflow-y-auto" id="tenantSwitcherList"></div>
+      <div class="p-3 border-t border-zinc-800 flex gap-2"><button onclick="switchTenant(null)" class="flex-1 py-2 rounded-xl bg-zinc-800 text-zinc-300 text-xs">Clear Filter (Owner: All)</button><button onclick="closeTenantSwitcher()" class="flex-1 py-2 rounded-xl bg-zinc-800 text-zinc-300 text-xs">Close</button></div>
+    </div>
+  </div>
+
+  <!-- CREATE TENANT MODAL -->
+  <div id="createTenantModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeCreateTenantModal()"></div>
+    <div class="relative w-full max-w-lg rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-6"><h3 class="text-sm font-semibold text-white">New Client Workspace — White-Label Portal</h3><button onclick="closeCreateTenantModal()" class="w-7 h-7 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+      <div class="space-y-4">
+        <div><label class="text-[11px] font-mono text-zinc-500 uppercase">Agency / Client Name *</label><input id="newTenantName" placeholder="Vance Scale Agency" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white outline-none focus:border-indigo-500"/></div>
+        <div class="grid grid-cols-2 gap-3"><div><label class="text-[11px] font-mono text-zinc-500 uppercase">Slug (auto)</label><input id="newTenantSlug" placeholder="vance-scale" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white outline-none focus:border-indigo-500"/></div><div><label class="text-[11px] font-mono text-zinc-500 uppercase">Plan</label><select id="newTenantPlan" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white"><option value="starter">Starter</option><option value="pro" selected>Pro</option><option value="enterprise">Enterprise</option><option value="white_label">White-Label</option></select></div></div>
+        <div><label class="text-[11px] font-mono text-zinc-500 uppercase">Custom Domain (portal.client.com)</label><input id="newTenantCustomDomain" placeholder="portal.vancescale.com" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white outline-none focus:border-indigo-500"/><div class="text-[10px] text-zinc-600 mt-1">White-label URL: https://custom_domain → serves /portal/:slug with client branding</div></div>
+        <div class="grid grid-cols-2 gap-3"><div><label class="text-[11px] font-mono text-zinc-500 uppercase">Primary Color</label><input id="newTenantColor" type="color" value="#4f46e5" class="w-full mt-1 h-10 rounded-xl bg-zinc-950 border border-zinc-800"/><input id="newTenantColorText" value="#4f46e5" class="w-full mt-2 px-3 py-2 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white"/></div><div><label class="text-[11px] font-mono text-zinc-500 uppercase">Logo URL</label><input id="newTenantLogo" placeholder="https://..." class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white outline-none focus:border-indigo-500"/><div class="mt-2 flex items-center gap-2"><input id="newTenantHideBranding" type="checkbox" class="rounded"/><label class="text-xs text-zinc-400">Hide SIPRA branding (white-label)</label></div></div></div>
+        <button onclick="createTenant()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold">Create Tenant + Default Workspace →</button>
+        <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-[11px] text-zinc-500">Creates: agency_clients row with slug, custom_domain, color, logo, hide_branding, plus workspaces row (default). Portal URL: /portal/:slug — isolated data via client_id FK on all tables.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE WORKSPACE MODAL -->
+  <div id="createWorkspaceModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeCreateWorkspaceModal()"></div>
+    <div class="relative w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl p-6">
+      <div class="flex items-center justify-between mb-6"><h3 class="text-sm font-semibold text-white">New Workspace</h3><button onclick="closeCreateWorkspaceModal()" class="w-7 h-7 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white">✕</button></div>
+      <div class="space-y-4">
+        <div><label class="text-[11px] font-mono text-zinc-500 uppercase">Workspace Name</label><input id="newWsName" placeholder="Client A - Social" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white outline-none focus:border-indigo-500"/></div>
+        <div><label class="text-[11px] font-mono text-zinc-500 uppercase">Client / Tenant</label><select id="newWsTenant" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white"></select></div>
+        <button onclick="createWorkspace()" class="w-full py-3 rounded-xl bg-indigo-600 text-white text-sm font-semibold">Create Workspace</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVITE MODAL -->
+  <div id="inviteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeInviteModal()"></div>
+    <div class="relative w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl p-6">
+      <div class="flex items-center justify-between mb-6"><h3 class="text-sm font-semibold text-white">Invite Client User</h3><button onclick="closeInviteModal()" class="w-7 h-7 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400">✕</button></div>
+      <div class="space-y-4">
+        <div><label class="text-[11px] font-mono text-zinc-500 uppercase">Email</label><input id="inviteEmail" placeholder="client@agency.com" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white outline-none focus:border-indigo-500"/></div>
+        <div class="grid grid-cols-2 gap-3"><div><label class="text-[11px] font-mono text-zinc-500 uppercase">Role</label><select id="inviteRole" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white"><option value="client_user">Client User</option><option value="client_admin">Client Admin</option><option value="agency_owner">Agency Owner</option></select></div><div><label class="text-[11px] font-mono text-zinc-500 uppercase">Tenant</label><select id="inviteTenant" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-sm text-white"></select></div></div>
+        <button onclick="sendInvite()" class="w-full py-3 rounded-xl bg-indigo-600 text-white text-sm font-semibold">Send Invite → /invite/:token</button>
+        <div class="text-[11px] text-zinc-500">Creates invitation with token, 7-day expiry, status pending. User registers via /invite/:token link, auto-assigned client_id and role.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMAND PALETTE -->
+  <div id="commandPalette" class="hidden fixed inset-0 z-50 flex items-start justify-center pt-[20vh] px-4">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeSearch()"></div>
+    <div class="relative w-full max-w-lg rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl overflow-hidden">
+      <div class="flex items-center gap-3 px-4 h-14 border-b border-zinc-800">
+        <svg class="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="searchInput" type="text" placeholder="Ask your AI workforce or jump to..." class="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-500 outline-none" oninput="handleSearch(this.value)"/>
+        <span class="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px] font-mono text-zinc-400">ESC</span>
+      </div>
+      <div class="p-2 max-h-80 overflow-y-auto" id="searchResults"></div>
+    </div>
+  </div>
+
+  <script>
+    let currentUser = null;
+    let currentTenant = null; // selected tenant object
+    let allTenants = [];
+    let allEmployees = [];
+    let authToken = localStorage.getItem('sipra_token') || null;
+    let inviteTokenFromUrl = null;
+
+    // Check URL for /portal/:slug or /invite/:token or ?tenant=
+    function parseUrl(){
+      const path = window.location.pathname;
+      const params = new URLSearchParams(window.location.search);
+      // portal
+      const portalMatch = path.match(/\/portal\/([^\/]+)/);
+      if(portalMatch){
+        const slug = portalMatch[1];
+        params.set('tenant', slug);
+        window.history.replaceState({}, '', `/?tenant=${slug}&portal=${slug}`);
+        return slug;
+      }
+      const inviteMatch = path.match(/\/invite\/([^\/]+)/);
+      if(inviteMatch){
+        inviteTokenFromUrl = inviteMatch[1];
+        // will show register with invite info
+        setTimeout(()=>openAuth('register'), 500);
+        fetchInviteInfo(inviteTokenFromUrl);
+        return null;
+      }
+      return params.get('tenant') || params.get('client') || params.get('portal') || null;
+    }
+
+    async function fetchInviteInfo(token){
+      const res = await fetch(`/api/invite/${token}`);
+      const data = await res.json();
+      const el = document.getElementById('inviteInfo');
+      if(res.ok){
+        el.classList.remove('hidden');
+        el.innerHTML = `📩 Invited to <b>${data.client_name}</b> as <b>${data.role}</b> · Email must be <b>${data.email}</b> · Expires ${new Date(data.expires_at).toLocaleDateString()}<br/><span class="text-[11px] text-zinc-400">Token: ${token.slice(0,12)}...</span>`;
+        document.getElementById('regEmail').value = data.email;
+        document.getElementById('regEmail').disabled = true;
+      } else {
+        el.classList.remove('hidden');
+        el.classList.add('bg-red-950/30','border-red-900/50','text-red-200');
+        el.textContent = data.error || 'Invalid invitation';
+      }
+    }
+
+    function getHeaders(){
+      const h = {'Content-Type':'application/json'};
+      if(authToken) h['Authorization'] = `Bearer ${authToken}`;
+      if(currentTenant) h['X-Tenant-Slug'] = currentTenant.slug;
+      return h;
+    }
+
+    async function fetchJSON(url, opts={}){
+      try{
+        opts.headers = {...getHeaders(), ...(opts.headers||{})};
+        opts.credentials = 'include';
+        const r = await fetch(url, opts);
+        if(r.status===401){
+          // auth required
+          openAuth('login');
+          return null;
+        }
+        return await r.json();
+      }catch(e){console.error(e); return null}
+    }
+
+    // AUTH
+    function openAuth(tab='login'){
+      document.getElementById('authModal').classList.remove('hidden');
+      switchAuthTab(tab);
+    }
+    function closeAuth(){document.getElementById('authModal').classList.add('hidden');}
+    function switchAuthTab(tab){
+      document.getElementById('authTabLogin').className = tab==='login' ? 'flex-1 py-2.5 rounded-lg bg-zinc-800 text-white text-sm font-medium' : 'flex-1 py-2.5 rounded-lg text-zinc-400 text-sm font-medium';
+      document.getElementById('authTabRegister').className = tab==='register' ? 'flex-1 py-2.5 rounded-lg bg-zinc-800 text-white text-sm font-medium' : 'flex-1 py-2.5 rounded-lg text-zinc-400 text-sm font-medium';
+      document.getElementById('authLoginForm').classList.toggle('hidden', tab!=='login');
+      document.getElementById('authRegisterForm').classList.toggle('hidden', tab!=='register');
+    }
+    async function doLogin(){
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const errEl = document.getElementById('loginError');
+      errEl.classList.add('hidden');
+      if(!email||!password){errEl.textContent='Email and password required'; errEl.classList.remove('hidden'); return}
+      const res = await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({email,password})});
+      const data = await res.json();
+      if(!res.ok){errEl.textContent=data.error||'Login failed'; errEl.classList.remove('hidden'); return}
+      authToken = data.user.api_token;
+      localStorage.setItem('sipra_token', authToken);
+      currentUser = data.user;
+      closeAuth();
+      showToast(`Welcome ${currentUser.name} · ${currentUser.role}`, 'success');
+      await checkAuth();
+      showDashboard();
+    }
+    async function doRegister(){
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').disabled ? document.getElementById('regEmail').value.trim() : document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const errEl = document.getElementById('regError');
+      errEl.classList.add('hidden');
+      if(!name||!email||!password){errEl.textContent='All fields required'; errEl.classList.remove('hidden'); return}
+      const payload = {name,email,password};
+      if(inviteTokenFromUrl) payload.invite_token = inviteTokenFromUrl;
+      const res = await fetch('/api/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(payload)});
+      const data = await res.json();
+      if(!res.ok){errEl.textContent=data.error||'Register failed'; errEl.classList.remove('hidden'); return}
+      authToken = data.user.api_token;
+      localStorage.setItem('sipra_token', authToken);
+      currentUser = data.user;
+      closeAuth();
+      showToast(`Account created · ${currentUser.role} · Tenant: ${currentUser.client_name||'Master'}`, 'success');
+      inviteTokenFromUrl = null;
+      document.getElementById('regEmail').disabled = false;
+      await checkAuth();
+      showDashboard();
+    }
+    async function doLogout(){
+      await fetch('/api/auth/logout',{method:'POST',headers:getHeaders(),credentials:'include'});
+      authToken = null;
+      localStorage.removeItem('sipra_token');
+      currentUser = null;
+      currentTenant = null;
+      updateAuthUI();
+      showLanding();
+      showToast('Logged out', 'info');
+      openAuth('login');
+    }
+    async function checkAuth(){
+      const data = await fetchJSON('/api/auth/me');
+      if(data && data.authenticated){
+        currentUser = data.user;
+        authToken = data.user.api_token;
+        localStorage.setItem('sipra_token', authToken);
+        // if user has client_id, set currentTenant to that client's tenant
+        if(data.tenant){
+          currentTenant = data.tenant;
+        } else if(data.user.client_id){
+          // fetch tenant
+          const t = await fetchJSON(`/api/tenants/${data.user.client_id}`);
+          if(t) currentTenant = t;
+        }
+        // check URL tenant param overrides? Only for owner
+        const urlTenantSlug = parseUrl();
+        if(urlTenantSlug && currentUser.role==='owner'){
+          const t = allTenants.find(x=>x.slug===urlTenantSlug) || await fetchJSON(`/api/tenants?`); // fallback
+          // try fetch by slug via list
+          if(!currentTenant || currentTenant.slug!==urlTenantSlug){
+            const tenants = await fetchJSON('/api/tenants');
+            if(tenants){
+              const found = tenants.find(x=>x.slug===urlTenantSlug);
+              if(found) currentTenant = found;
+            }
+          }
+        }
+        updateAuthUI();
+        applyWhiteLabel();
+        return true;
+      } else {
+        currentUser = null;
+        updateAuthUI();
+        return false;
+      }
+    }
+    function updateAuthUI(){
+      const isAuth = !!currentUser;
+      document.getElementById('authButtons').classList.toggle('hidden', isAuth);
+      document.getElementById('userMenu').classList.toggle('hidden', !isAuth);
+      document.getElementById('userMenu').classList.toggle('flex', isAuth);
+      document.getElementById('tenantSwitcher').classList.toggle('hidden', !isAuth);
+      document.getElementById('tenantSwitcher').classList.toggle('flex', isAuth);
+      if(isAuth){
+        document.getElementById('userAvatar').src = currentUser.avatar || `https://i.pravatar.cc/150?u=${currentUser.email}`;
+        document.getElementById('dashUserAvatar').src = currentUser.avatar || `https://i.pravatar.cc/150?u=${currentUser.email}`;
+        document.getElementById('previewUserName').textContent = currentUser.name.split(' ')[0];
+        document.getElementById('dashUserName').textContent = currentUser.name.split(' ')[0];
+        document.getElementById('sidebarUserRole').textContent = currentUser.role;
+      }
+      // tenant UI
+      if(currentTenant){
+        document.getElementById('tenantBadge').textContent = `${currentTenant.name} · /portal/${currentTenant.slug}`;
+        document.getElementById('tenantBadge').classList.remove('hidden');
+        document.getElementById('tenantBadge').classList.add('inline-flex');
+        document.getElementById('currentTenantName').textContent = currentTenant.name;
+        document.getElementById('currentTenantLogo').textContent = currentTenant.name[0];
+        document.getElementById('currentTenantLogo').style.background = currentTenant.color_primary;
+        document.getElementById('dashCurrentTenantName').textContent = currentTenant.name;
+        document.getElementById('dashCurrentTenantLogo').textContent = currentTenant.name[0];
+        document.getElementById('dashCurrentTenantLogo').style.background = currentTenant.color_primary;
+        document.getElementById('dashTopTenant').textContent = `Live 24/7 · ${currentTenant.name} · ${currentTenant.custom_domain||currentTenant.domain} · White-Label: ${currentTenant.hide_sipra_branding?'Yes':'No'}`;
+        document.getElementById('sidebarTenantName').textContent = currentTenant.name;
+        document.getElementById('sidebarTenantSlug').textContent = currentTenant.slug;
+        document.getElementById('dashTenantName').textContent = currentTenant.name;
+        document.getElementById('dashTenantSlug').textContent = currentTenant.slug;
+        document.getElementById('studioTenantName').textContent = currentTenant.name;
+        document.getElementById('leadsTenantName').textContent = currentTenant.name;
+        document.getElementById('previewTenantInfo').textContent = `${currentTenant.name} · ${currentTenant.plan} · ${currentTenant.hide_sipra_branding?'White-Label':''}`;
+      } else {
+        document.getElementById('tenantBadge').classList.add('hidden');
+        document.getElementById('currentTenantName').textContent = 'SIPRA Global';
+        document.getElementById('dashCurrentTenantName').textContent = 'SIPRA Global';
+      }
+    }
+    function applyWhiteLabel(){
+      // If currentTenant has hide_sipra_branding true, hide SIPRA branding elements
+      const isWhiteLabel = currentTenant && currentTenant.hide_sipra_branding;
+      document.querySelectorAll('.sipra-branding').forEach(el=>{
+        if(isWhiteLabel) el.classList.add('white-label-hidden');
+        else el.classList.remove('white-label-hidden');
+      });
+      if(isWhiteLabel && currentTenant){
+        // Update logos and colors
+        document.getElementById('landingLogo').style.background = currentTenant.color_primary;
+        document.getElementById('landingLogo').textContent = currentTenant.name[0];
+        document.getElementById('dashLogo').style.background = currentTenant.color_primary;
+        document.getElementById('dashLogo').textContent = currentTenant.name[0];
+        document.getElementById('dashMobileTitle').textContent = currentTenant.name;
+        // Update page title
+        document.title = `${currentTenant.name} | Client Portal`;
+      } else {
+        document.getElementById('landingLogo').style.background = '#4f46e5';
+        document.getElementById('landingLogo').textContent = 'S';
+        document.getElementById('dashLogo').style.background = '#4f46e5';
+        document.getElementById('dashLogo').textContent = 'S';
+        document.title = 'SIPRA AI Social Workforce | Your AI Social Media Team — Working 24/7';
+      }
+      // Apply custom CSS if any
+      let styleEl = document.getElementById('customTenantStyle');
+      if(!styleEl){styleEl=document.createElement('style'); styleEl.id='customTenantStyle'; document.head.appendChild(styleEl);}
+      if(currentTenant && currentTenant.custom_css){
+        styleEl.textContent = currentTenant.custom_css;
+      } else {
+        styleEl.textContent = '';
+      }
+    }
+
+    // TENANT SWITCHER
+    async function openTenantSwitcher(){
+      const modal = document.getElementById('tenantSwitcherModal');
+      modal.classList.remove('hidden');
+      const tenants = await fetchJSON('/api/tenants');
+      if(!tenants) return;
+      allTenants = tenants;
+      document.getElementById('tenantSwitcherList').innerHTML = tenants.map(t=>`
+        <button onclick="switchTenant('${t.slug}')" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 text-left transition ${currentTenant && currentTenant.slug===t.slug?'bg-zinc-800 border border-zinc-700':''}">
+          <span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background:${t.color_primary}">${t.name[0]}</span>
+          <div class="flex-1"><div class="text-sm text-white font-medium">${t.name}</div><div class="text-[11px] text-zinc-500">${t.slug} · ${t.custom_domain||t.domain} · ${t.plan} ${t.hide_sipra_branding?'· White-Label':''} · ${t.workspaces} ws</div></div>
+          ${currentTenant && currentTenant.slug===t.slug?'<span class="text-[10px] px-2 py-1 rounded-full bg-indigo-600 text-white">Active</span>':''}
+        </button>
+      `).join('');
+    }
+    function closeTenantSwitcher(){document.getElementById('tenantSwitcherModal').classList.add('hidden');}
+    async function switchTenant(slug){
+      closeTenantSwitcher();
+      if(!slug){
+        currentTenant = null;
+        // clear query param
+        const url = new URL(window.location);
+        url.searchParams.delete('tenant');
+        url.searchParams.delete('portal');
+        window.history.pushState({}, '', url);
+      } else {
+        const tenant = allTenants.find(t=>t.slug===slug);
+        if(tenant){
+          currentTenant = tenant;
+          const url = new URL(window.location);
+          url.searchParams.set('tenant', slug);
+          window.history.pushState({}, '', url);
+        }
+      }
+      updateAuthUI();
+      applyWhiteLabel();
+      // reload data with tenant filter
+      loadStats(); loadLeads(); loadPosts(); loadApprovals(); loadSocial(); loadInbox(); loadAutomations(); loadBrand(); loadAnalytics();
+      showToast(`Switched to ${currentTenant?currentTenant.name:'Master Workspace (All)'}`, 'success');
+    }
+
+    // CREATE TENANT
+    function openCreateTenantModal(){document.getElementById('createTenantModal').classList.remove('hidden');}
+    function closeCreateTenantModal(){document.getElementById('createTenantModal').classList.add('hidden');}
+    async function createTenant(){
+      const name = document.getElementById('newTenantName').value.trim();
+      if(!name){showToast('Name required','error'); return}
+      const payload = {
+        name,
+        slug: document.getElementById('newTenantSlug').value.trim() || undefined,
+        plan: document.getElementById('newTenantPlan').value,
+        custom_domain: document.getElementById('newTenantCustomDomain').value.trim() || null,
+        color_primary: document.getElementById('newTenantColorText').value || document.getElementById('newTenantColor').value,
+        logo: document.getElementById('newTenantLogo').value.trim() || undefined,
+        hide_sipra_branding: document.getElementById('newTenantHideBranding').checked,
+        domain: `${(document.getElementById('newTenantSlug').value.trim() || name.toLowerCase().replace(/\s+/g,'-'))}.com`
+      };
+      const res = await fetch('/api/tenants',{method:'POST',headers:getHeaders(),body:JSON.stringify(payload)});
+      const data = await res.json();
+      if(!res.ok){showToast(data.error||'Failed to create','error'); return}
+      closeCreateTenantModal();
+      showToast(`Tenant created: ${data.name} · /portal/${data.slug}`, 'success');
+      loadTenants(); loadWorkspaces();
+      // auto switch
+      currentTenant = data;
+      updateAuthUI();
+      applyWhiteLabel();
+    }
+
+    // WORKSPACES
+    function openCreateWorkspaceModal(){
+      document.getElementById('createWorkspaceModal').classList.remove('hidden');
+      // populate tenant select
+      fetchJSON('/api/tenants').then(tenants=>{
+        if(!tenants) return;
+        document.getElementById('newWsTenant').innerHTML = tenants.map(t=>`<option value="${t.id}" ${currentTenant && currentTenant.id===t.id?'selected':''}>${t.name}</option>`).join('');
+      });
+    }
+    function closeCreateWorkspaceModal(){document.getElementById('createWorkspaceModal').classList.add('hidden');}
+    async function createWorkspace(){
+      const name = document.getElementById('newWsName').value.trim();
+      const tenantId = document.getElementById('newWsTenant').value;
+      if(!name||!tenantId){showToast('Name and tenant required','error'); return}
+      const res = await fetch(`/api/tenants/${tenantId}/workspaces`,{method:'POST',headers:getHeaders(),body:JSON.stringify({name})});
+      const data = await res.json();
+      if(!res.ok){showToast(data.error||'Failed','error'); return}
+      closeCreateWorkspaceModal();
+      showToast(`Workspace created: ${data.name}`, 'success');
+      loadWorkspaces();
+    }
+
+    // INVITES
+    function openInviteModal(){
+      document.getElementById('inviteModal').classList.remove('hidden');
+      fetchJSON('/api/tenants').then(tenants=>{
+        if(!tenants) return;
+        document.getElementById('inviteTenant').innerHTML = tenants.map(t=>`<option value="${t.id}" ${currentTenant && currentTenant.id===t.id?'selected':''}>${t.name}</option>`).join('');
+      });
+    }
+    function closeInviteModal(){document.getElementById('inviteModal').classList.add('hidden');}
+    async function sendInvite(){
+      const email = document.getElementById('inviteEmail').value.trim();
+      const role = document.getElementById('inviteRole').value;
+      const tenantId = document.getElementById('inviteTenant').value;
+      if(!email||!tenantId){showToast('Email and tenant required','error'); return}
+      const res = await fetch(`/api/tenants/${tenantId}/invitations`,{method:'POST',headers:getHeaders(),body:JSON.stringify({email,role})});
+      const data = await res.json();
+      if(!res.ok){showToast(data.error||'Failed','error'); return}
+      closeInviteModal();
+      showToast(`Invite sent to ${email} · Link: /invite/${data.token.slice(0,12)}...`, 'success');
+      loadInvites();
+    }
+
+    // DATA LOADERS (tenant-aware)
+    async function loadStats(){
+      const url = currentTenant ? `/api/stats?tenant=${currentTenant.slug}` : '/api/stats';
+      const stats = await fetchJSON(url);
+      if(!stats) return;
+      document.getElementById('statTotalPosts').textContent = stats.content_pipeline.total;
+      document.getElementById('statScheduled').textContent = stats.content_pipeline.scheduled;
+      document.getElementById('statPublished').textContent = stats.content_pipeline.published;
+      document.getElementById('statPending').textContent = stats.content_pipeline.pending;
+      document.getElementById('statNewLeads').textContent = stats.inbound_leads.new;
+      document.getElementById('statQualified').textContent = stats.inbound_leads.qualified;
+      document.getElementById('statActiveEmp').textContent = stats.ai_workforce.active;
+      document.getElementById('statTasks').textContent = (stats.ai_workforce.tasks_completed||0).toLocaleString()+'+';
+      document.getElementById('statSignals').textContent = stats.inbound_leads.signals_captured;
+      document.getElementById('previewDbStats').textContent = `DB: ${stats.content_pipeline.total} posts · ${stats.inbound_leads.total} leads · Tenant: ${currentTenant?currentTenant.slug:'all'}`;
+      document.getElementById('dashTotalPosts').textContent = stats.content_pipeline.total;
+      document.getElementById('dashScheduled').textContent = stats.content_pipeline.scheduled;
+      document.getElementById('dashPublished').textContent = stats.content_pipeline.published;
+      document.getElementById('dashPending').textContent = stats.content_pipeline.pending;
+      document.getElementById('dashNewLeads').textContent = stats.inbound_leads.new;
+      document.getElementById('dashQualified').textContent = stats.inbound_leads.qualified;
+      document.getElementById('dashActiveEmp').textContent = stats.ai_workforce.active;
+      document.getElementById('dashTasks').textContent = (stats.ai_workforce.tasks_completed||0).toLocaleString()+'+';
+      document.getElementById('dashSignals').textContent = stats.inbound_leads.signals_captured;
+      document.getElementById('dashProposal').textContent = '2';
+      document.getElementById('dashDbCount').textContent = stats.content_pipeline.total + stats.inbound_leads.total + stats.ai_workforce.total;
+      document.getElementById('navLeadsCount').textContent = stats.inbound_leads.new + ' NEW';
+      document.getElementById('navApprovalCount').textContent = stats.pending_approvals;
+      document.getElementById('navWorkforceCount').textContent = stats.ai_workforce.total;
+      document.getElementById('sidebarActiveCount').textContent = stats.ai_workforce.active;
+      document.getElementById('previewWorkforceText').textContent = `${stats.ai_workforce.active} digital employees are active`;
+      document.getElementById('dashWorkforceText').textContent = `${stats.ai_workforce.active} digital employees are active`;
+    }
+
+    async function loadEmployees(){
+      const emps = await fetchJSON('/api/employees');
+      if(!emps) return;
+      const active = emps.filter(e=>e.status==='active').slice(0,4);
+      const avatarsHTML = active.map(e=>`<img src="${e.avatar}" class="w-6 h-6 rounded-full border-2 border-zinc-900"/>`).join('') + `<div class="w-6 h-6 rounded-full bg-zinc-800 border-2 border-zinc-900 flex items-center justify-center text-[10px]">+${emps.length-4}</div>`;
+      document.getElementById('previewAvatars').innerHTML = avatarsHTML;
+      document.getElementById('dashAvatars').innerHTML = avatarsHTML;
+      document.getElementById('previewEmployeesGrid').innerHTML = active.map(e=>`
+        <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
+          <div class="flex gap-3"><img src="${e.avatar}" class="w-10 h-10 rounded-xl object-cover"/><div class="flex-1"><div class="text-sm font-semibold text-white">${e.name}</div><div class="text-[11px] text-indigo-400">${e.role}</div><div class="mt-2 text-[11px] text-zinc-400 leading-relaxed line-clamp-2">${e.description}</div><div class="mt-3 flex justify-between items-center"><span class="text-[11px] font-mono text-zinc-500">Tasks: <b class="text-zinc-300">${e.tasks}</b></span><span class="text-[10px] px-2 py-1 rounded-full bg-emerald-950/50 text-emerald-400 border border-emerald-900/50">${e.status}</span></div></div></div>
+        </div>
+      `).join('');
+      document.getElementById('dashEmployeesGrid').innerHTML = active.map(e=>`
+        <div class="group p-5 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition cursor-pointer">
+          <div class="flex gap-3"><img src="${e.avatar}" class="w-11 h-11 rounded-xl object-cover"/><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><div class="text-sm font-semibold text-white truncate">${e.name}</div><span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950/50 text-emerald-400 border border-emerald-900/50 font-mono">${e.status}</span></div><div class="text-[11px] text-indigo-400 font-medium">${e.role}</div><div class="mt-2 text-[11px] text-zinc-400 leading-relaxed line-clamp-3">${e.description}</div><div class="mt-3 flex justify-between items-center"><span class="text-[11px] font-mono text-zinc-500">Tasks: <b class="text-zinc-300">${e.tasks}</b></span><button onclick="runEmployee(${e.id})" class="text-[11px] px-2.5 py-1 rounded-lg bg-zinc-800 text-zinc-300 group-hover:bg-zinc-700 transition">Run Now</button></div></div></div>
+        </div>
+      `).join('');
+      document.getElementById('workforceGrid').innerHTML = emps.map(e=>`
+        <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition"><div class="flex gap-3"><img src="${e.avatar}" class="w-12 h-12 rounded-xl object-cover"/><div class="flex-1"><div class="flex items-center justify-between"><div class="text-sm font-bold text-white">${e.name}</div><span class="text-[10px] px-2 py-0.5 rounded-full ${e.status==='active'?'bg-emerald-950/50 text-emerald-400 border border-emerald-900/50':'bg-zinc-800 text-zinc-400'} font-mono">${e.status}</span></div><div class="text-xs text-indigo-400">${e.role}</div><div class="text-[11px] text-zinc-500 font-mono mt-1">${e.specialization} · ${e.model}</div><p class="text-xs text-zinc-400 mt-2 leading-relaxed">${e.description}</p><div class="mt-3 flex justify-between items-center"><span class="text-xs font-mono text-zinc-500">Tasks: <b class="text-white">${e.tasks}</b> · ${e.uptime}</span><button onclick="runEmployee(${e.id})" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs">Run</button></div></div></div></div>
+      `).join('');
+    }
+
+    async function loadLeads(){
+      const filter = document.getElementById('leadsFilter')?.value || '';
+      let url = '/api/leads';
+      const params = new URLSearchParams();
+      if(filter) params.set('status', filter);
+      if(currentTenant) params.set('tenant', currentTenant.slug);
+      if(params.toString()) url += '?' + params.toString();
+      const leads = await fetchJSON(url);
+      if(!leads) return;
+      document.getElementById('previewLeads').innerHTML = leads.slice(0,3).map(l=>`
+        <div class="flex justify-between items-center"><div><div class="text-xs text-white">${l.name}</div><div class="text-[11px] text-zinc-500">${l.company}</div></div><div class="text-right"><div class="text-xs text-white">${l.score}/100</div><div class="text-[10px] ${l.status==='qualified'?'text-emerald-400':l.status==='proposal'?'text-amber-400':'text-zinc-400'}">${l.status}</div></div></div>
+      `).join('');
+      document.getElementById('dashLeadsList').innerHTML = leads.slice(0,3).map(l=>`
+        <div class="flex justify-between items-center p-3 rounded-xl bg-zinc-950 border border-zinc-800 hover:border-zinc-700 transition cursor-pointer"><div><div class="text-xs font-medium text-white">${l.name}</div><div class="text-[11px] text-zinc-500">${l.company}</div><div class="text-[10px] text-zinc-600 mt-1">${l.intent_signal}</div></div><div class="text-right"><div class="text-xs font-bold text-white">${l.score}/100</div><div class="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300 font-mono mt-1">${l.status}</div></div></div>
+      `).join('');
+      document.getElementById('leadsGrid').innerHTML = leads.map(l=>`
+        <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition"><div class="flex justify-between items-start mb-2"><div class="flex gap-2"><img src="${l.avatar}" class="w-8 h-8 rounded-full"/><div><div class="text-sm font-semibold text-white">${l.name}</div><div class="text-[11px] text-zinc-500">${l.company} ${l.client_name?`· ${l.client_name}`:''}</div></div></div><span class="text-xs font-bold text-white">${l.score}</span></div><div class="text-[11px] text-zinc-400 mt-2">${l.intent_signal}</div><div class="mt-3 flex justify-between items-center"><span class="text-[10px] px-2 py-1 rounded-full ${l.status==='qualified'?'bg-emerald-950/50 text-emerald-400 border border-emerald-900/50':l.status==='proposal'?'bg-indigo-950/50 text-indigo-300 border border-indigo-900/50':'bg-zinc-800 text-zinc-400'}">${l.status}</span><span class="text-[10px] font-mono text-zinc-500">${new Date(l.created_at).toLocaleDateString()}</span></div></div>
+      `).join('');
+    }
+
+    async function loadApprovals(){
+      let url = '/api/approvals?status=all';
+      if(currentTenant) url += `&tenant=${currentTenant.slug}`;
+      const approvals = await fetchJSON(url);
+      if(!approvals) return;
+      const pending = approvals.filter(a=>a.status==='pending');
+      document.getElementById('previewApproval').innerHTML = pending.length ? `
+        <div class="flex items-center justify-between mb-3"><div class="text-sm font-semibold text-white">Pending Approvals (${pending.length})</div><span class="text-[10px] font-mono px-2 py-1 rounded-full bg-amber-950/50 text-amber-300 border border-amber-900/50">Queue</span></div>
+        <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800"><div class="text-xs font-medium text-white leading-snug">${pending[0].title}</div><div class="text-[10px] font-mono text-zinc-500 mt-1">Level ${pending[0].level} · By: ${pending[0].author_name} ${pending[0].client_name?`· ${pending[0].client_name}`:''}</div><div class="mt-3 text-[11px] text-zinc-400 leading-relaxed line-clamp-3">${pending[0].content}</div><div class="mt-3 flex gap-2"><button onclick="handleApproval(${pending[0].id},'publish')" class="flex-1 py-2 rounded-xl bg-white text-zinc-900 text-xs font-semibold">Publish Now</button><button onclick="handleApproval(${pending[0].id},'approve')" class="flex-1 py-2 rounded-xl bg-zinc-800 text-zinc-300 text-xs">Review</button></div></div>
+      ` : `<div class="text-xs text-zinc-500">No pending approvals for ${currentTenant?currentTenant.name:'all tenants'}</div>`;
+      document.getElementById('dashApprovalSection').innerHTML = document.getElementById('previewApproval').innerHTML;
+      document.getElementById('approvalsGrid').innerHTML = approvals.map(a=>`
+        <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800"><div class="flex justify-between"><div class="text-sm font-semibold text-white">${a.title}</div><span class="text-[10px] px-2 py-1 rounded-full ${a.status==='pending'?'bg-amber-950/50 text-amber-300':'bg-emerald-950/50 text-emerald-300'}">${a.status}</span></div><div class="text-[11px] text-zinc-500 mt-1">Level ${a.level} · ${a.author_name} ${a.client_name?`· ${a.client_name}`:''} · ${new Date(a.created_at).toLocaleDateString()}</div><div class="text-xs text-zinc-400 mt-2">${a.content.slice(0,200)}...</div><div class="mt-3 flex gap-2"><button onclick="handleApproval(${a.id},'publish')" class="px-3 py-1.5 rounded-lg bg-white text-zinc-900 text-xs">Publish</button><button onclick="handleApproval(${a.id},'approve')" class="px-3 py-1.5 rounded-lg bg-zinc-800 text-zinc-300 text-xs">Approve</button><button onclick="handleApproval(${a.id},'reject')" class="px-3 py-1.5 rounded-lg bg-zinc-800 text-zinc-300 text-xs">Reject</button></div></div>
+      `).join('');
+    }
+
+    async function loadPosts(){
+      let url = '/api/posts';
+      if(currentTenant) url += `?tenant=${currentTenant.slug}`;
+      const posts = await fetchJSON(url);
+      if(!posts) return;
+      document.getElementById('studioPostsList').innerHTML = posts.map(p=>`
+        <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition"><div class="flex justify-between items-start"><div><div class="text-sm font-semibold text-white">${p.title}</div><div class="text-[11px] text-zinc-500 mt-1">${p.platform} · ${p.status} · Level ${p.approval_level} · by ${p.author_name||'System'} ${p.client_name?`· ${p.client_name}`:''}</div></div><span class="text-[10px] px-2 py-1 rounded-full ${p.status==='published'?'bg-emerald-950/50 text-emerald-400':p.status==='scheduled'?'bg-indigo-950/50 text-indigo-300':p.status==='pending'?'bg-amber-950/50 text-amber-300':'bg-zinc-800 text-zinc-400'}">${p.status}</span></div><div class="text-xs text-zinc-400 mt-2 line-clamp-2">${p.content.slice(0,180)}...</div><div class="mt-3 text-[11px] font-mono text-zinc-500">Created: ${new Date(p.created_at).toLocaleDateString()} · Engagement: ${p.engagement}</div></div>
+      `).join('');
+      const cal = document.getElementById('calendarGrid');
+      if(cal){
+        const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+        cal.innerHTML = days.map(d=>`<div class="text-[10px] font-mono text-zinc-500 p-2">${d}</div>`).join('') + Array.from({length:30},(_,i)=>{
+          const dayPosts = posts.filter(p=>p.scheduled_at && new Date(p.scheduled_at).getDate()===i+1);
+          return `<div class="min-h-[80px] p-2 rounded-xl bg-zinc-900 border border-zinc-800"><div class="text-[11px] text-zinc-400">${i+1}</div>${dayPosts.map(p=>`<div class="mt-1 text-[10px] px-1.5 py-0.5 rounded bg-indigo-950/50 text-indigo-300 truncate">${p.title.slice(0,15)}</div>`).join('')}</div>`;
+        }).join('');
+      }
+      // workspace select
+      if(currentTenant){
+        const ws = await fetchJSON(`/api/tenants/${currentTenant.id}/workspaces`);
+        if(ws){
+          document.getElementById('newPostWorkspace').innerHTML = '<option value="">Select Workspace (optional)</option>' + ws.map(w=>`<option value="${w.id}">${w.name}</option>`).join('');
+        }
+      }
+    }
+
+    async function loadTenants(){
+      const tenants = await fetchJSON('/api/tenants');
+      if(!tenants) return;
+      allTenants = tenants;
+      document.getElementById('navAgencyCount').textContent = tenants.length;
+      document.getElementById('previewTenants').innerHTML = tenants.slice(0,4).map(t=>`
+        <div class="flex items-center gap-2 p-2 rounded-xl bg-zinc-950 border border-zinc-800"><span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-[10px] font-bold" style="background:${t.color_primary}">${t.name[0]}</span><div class="flex-1 min-w-0"><div class="text-xs text-white truncate">${t.name}</div><div class="text-[10px] text-zinc-500 truncate">${t.slug} · ${t.custom_domain||t.domain}</div></div><span class="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400">${t.plan}</span></div>
+      `).join('');
+      document.getElementById('agencyGrid').innerHTML = tenants.map(t=>`
+        <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition group">
+          <div class="flex gap-3"><img src="${t.logo}" class="w-10 h-10 rounded-xl"/><div class="flex-1"><div class="flex items-center justify-between"><div class="text-sm font-bold text-white">${t.name}</div><span class="w-2 h-2 rounded-full ${t.status==='active'?'bg-emerald-400':'bg-red-400'}"></span></div><div class="text-xs text-zinc-500">${t.domain} ${t.custom_domain?`→ ${t.custom_domain}`:''}</div><div class="text-[11px] text-zinc-500 mt-1">${t.slug} · ${t.workspaces} workspaces · ${t.monthly_posts} posts/mo · ${t.plan}</div></div><div class="w-3 h-3 rounded-full" style="background:${t.color_primary}"></div></div>
+          <div class="mt-3 grid grid-cols-2 gap-2 text-[11px]">
+            <div class="p-2 rounded-lg bg-zinc-950 border border-zinc-800"><div class="text-zinc-500">Portal URL</div><div class="text-indigo-400 font-mono">/portal/${t.slug}</div></div>
+            <div class="p-2 rounded-lg bg-zinc-950 border border-zinc-800"><div class="text-zinc-500">Custom Domain</div><div class="text-zinc-300 font-mono truncate">${t.custom_domain||'—'}</div></div>
+          </div>
+          <div class="mt-3 flex gap-2"><button onclick="switchTenant('${t.slug}')" class="flex-1 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs">Switch to Tenant</button><button onclick="editTenant(${t.id})" class="flex-1 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs">Edit Portal</button></div>
+          <div class="mt-2 flex gap-2 text-[10px]"><span class="px-2 py-1 rounded-full ${t.hide_sipra_branding?'bg-emerald-950/50 text-emerald-300 border border-emerald-900/50':'bg-zinc-800 text-zinc-400'}">${t.hide_sipra_branding?'White-Label: Yes':'White-Label: No'}</span><span class="px-2 py-1 rounded-full bg-zinc-800 text-zinc-400">${t.workspaces} ws</span></div>
+        </div>
+      `).join('');
+    }
+
+    async function loadWorkspaces(){
+      const tenants = await fetchJSON('/api/tenants');
+      if(!tenants) return;
+      let allWs = [];
+      for(let t of tenants){
+        const ws = await fetchJSON(`/api/tenants/${t.id}/workspaces`);
+        if(ws) allWs = allWs.concat(ws.map(w=>({...w, tenant_name:t.name, tenant_slug:t.slug, tenant_color:t.color_primary})));
+      }
+      document.getElementById('navWorkspaceCount').textContent = allWs.length;
+      document.getElementById('sidebarWorkspaceCount').textContent = allWs.length;
+      document.getElementById('workspacesGrid').innerHTML = allWs.map(w=>`
+        <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800"><div class="flex gap-3"><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold" style="background:${w.tenant_color}">${w.tenant_name[0]}</span><div class="flex-1"><div class="text-sm font-bold text-white">${w.name}</div><div class="text-xs text-zinc-500">${w.tenant_name} · ${w.slug} ${w.is_default?'<span class="ml-1 px-1.5 py-0.5 rounded bg-indigo-600 text-white text-[10px]">Default</span>':''}</div><div class="text-[11px] text-zinc-600 mt-1">${w.description||''}</div></div></div><div class="mt-3 text-[10px] font-mono text-zinc-500">ID: ${w.id} · Tenant: ${w.tenant_slug} · Created ${new Date(w.created_at).toLocaleDateString()}</div></div>
+      `).join('');
+    }
+
+    async function loadClientUsers(){
+      const tenants = await fetchJSON('/api/tenants');
+      if(!tenants) return;
+      let allUsers = [];
+      for(let t of tenants){
+        const users = await fetchJSON(`/api/tenants/${t.id}/users`);
+        if(users) allUsers = allUsers.concat(users);
+      }
+      // also include global users without client_id
+      const globalUsers = await fetchJSON('/api/tenants'); // already have
+      document.getElementById('clientUsersGrid').innerHTML = allUsers.map(u=>`
+        <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex gap-3"><img src="${u.avatar}" class="w-10 h-10 rounded-xl"/><div class="flex-1"><div class="text-sm font-semibold text-white">${u.name}</div><div class="text-xs text-zinc-500">${u.email} · ${u.role}</div><div class="text-[11px] text-zinc-600">${u.client_name||'Master'} · Last login ${u.last_login?new Date(u.last_login).toLocaleDateString():'never'}</div></div><span class="w-2 h-2 rounded-full ${u.is_active?'bg-emerald-400':'bg-red-400'}"></span></div>
+      `).join('');
+    }
+
+    async function loadInvites(){
+      const tenants = await fetchJSON('/api/tenants');
+      if(!tenants) return;
+      let allInvites = [];
+      for(let t of tenants){
+        const invs = await fetchJSON(`/api/tenants/${t.id}/invitations`);
+        if(invs) allInvites = allInvites.concat(invs);
+      }
+      document.getElementById('invitesGrid').innerHTML = allInvites.map(inv=>`
+        <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex justify-between items-center"><div><div class="text-sm text-white">${inv.email} → ${inv.client_name}</div><div class="text-[11px] text-zinc-500">${inv.role} · ${inv.status} · Expires ${new Date(inv.expires_at).toLocaleDateString()} · Token ${inv.token.slice(0,12)}...</div><div class="text-[10px] font-mono text-indigo-400 mt-1">${inv.invite_link}</div></div><span class="text-[10px] px-2 py-1 rounded-full ${inv.status==='pending'?'bg-amber-950/50 text-amber-300':'bg-zinc-800 text-zinc-400'}">${inv.status}</span></div>
+      `).join('');
+    }
+
+    async function loadSocial(){
+      let url = '/api/social-accounts';
+      if(currentTenant) url += `?tenant=${currentTenant.slug}`;
+      const accounts = await fetchJSON(url);
+      if(!accounts) return;
+      document.getElementById('socialGrid').innerHTML = accounts.map(a=>`
+        <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center text-zinc-400 font-bold text-xs">${a.platform[0].toUpperCase()}</div><div class="flex-1"><div class="text-sm font-semibold text-white">${a.display_name} ${a.client_id?`· ${currentTenant?currentTenant.name:''}`:''}</div><div class="text-xs text-zinc-500">@${a.username} · ${a.followers.toLocaleString()} followers · ${a.engagement_rate}% eng</div></div><span class="w-2 h-2 rounded-full ${a.connected?'bg-emerald-400':'bg-red-400'}"></span></div>
+      `).join('');
+    }
+
+    async function loadInbox(){
+      let url = '/api/inbox';
+      if(currentTenant) url += `?tenant=${currentTenant.slug}`;
+      const msgs = await fetchJSON(url);
+      if(!msgs) return;
+      document.getElementById('inboxGrid').innerHTML = msgs.map(m=>`
+        <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800"><div class="flex gap-3"><img src="${m.sender_avatar}" class="w-8 h-8 rounded-full"/><div class="flex-1"><div class="flex justify-between"><div class="text-sm font-semibold text-white">${m.sender_name}</div><span class="text-[11px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">${m.platform}</span></div><div class="text-xs text-zinc-500">${m.sender_handle} · Intent ${m.intent_score}/100</div><div class="text-sm text-zinc-300 mt-2">${m.message}</div>${m.response?`<div class="mt-2 p-2 rounded-lg bg-zinc-950 border border-zinc-800 text-xs text-zinc-400">Reply: ${m.response}</div>`:''}<div class="mt-2 flex gap-2"><button onclick="replyInbox(${m.id})" class="px-3 py-1 rounded-lg bg-indigo-600 text-white text-xs">Reply</button><span class="text-[10px] px-2 py-1 rounded-full bg-zinc-800 text-zinc-400">${m.status}</span></div></div></div></div>
+      `).join('');
+    }
+
+    async function loadAutomations(){
+      let url = '/api/automations';
+      if(currentTenant) url += `?tenant=${currentTenant.slug}`;
+      const autos = await fetchJSON(url);
+      if(!autos) return;
+      document.getElementById('automationsGrid').innerHTML = autos.map(a=>`
+        <div class="p-5 rounded-2xl bg-zinc-900 border border-zinc-800"><div class="flex justify-between"><div class="text-sm font-semibold text-white">${a.name}</div><button onclick="toggleAuto(${a.id})" class="w-10 h-5 rounded-full ${a.active?'bg-indigo-600':'bg-zinc-700'} relative transition"><span class="absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all ${a.active?'left-5':'left-0.5'}"></span></button></div><div class="text-xs text-zinc-400 mt-1">${a.description}</div><div class="text-[11px] font-mono text-zinc-500 mt-2">Trigger: ${a.trigger} · Action: ${a.action} · Runs: ${a.runs}</div></div>
+      `).join('');
+    }
+
+    async function loadBrand(){
+      let url = '/api/brand-dna';
+      if(currentTenant) url += `?tenant=${currentTenant.slug}`;
+      const dna = await fetchJSON(url);
+      if(!dna) return;
+      document.getElementById('brandGrid').innerHTML = dna.map(d=>`
+        <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800"><div class="text-[11px] font-mono text-indigo-400 uppercase">${d.category}</div><div class="text-sm font-semibold text-white mt-1">${d.key}</div><div class="text-xs text-zinc-400 mt-1">${d.value}</div></div>
+      `).join('');
+    }
+
+    async function loadAnalytics(){
+      let url = '/api/analytics?days=7';
+      if(currentTenant) url += `&tenant=${currentTenant.slug}`;
+      const data = await fetchJSON(url);
+      document.getElementById('analyticsGrid').innerHTML = `<div class="text-xs text-zinc-400">Loaded ${data?data.length:0} analytics snapshots for ${currentTenant?currentTenant.name:'all tenants'} · /api/analytics?tenant=${currentTenant?currentTenant.slug:'all'}<br/><br/>${data?data.slice(0,5).map(d=>`${d.date} ${d.platform}: ${d.followers} followers, ${d.engagement} eng, ${d.leads} leads`).join('<br/>'):''}</div>`;
+    }
+
+    async function loadAudit(){
+      const logs = await fetchJSON('/api/audit-logs');
+      if(!logs) return;
+      document.getElementById('auditGrid').innerHTML = logs.map(l=>`
+        <div class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 flex justify-between items-center"><div><div class="text-xs text-white">${l.action} ${l.resource} ${l.resource_id?`#${l.resource_id}`:''}</div><div class="text-[11px] text-zinc-500">User ${l.user_id} · Client ${l.client_id||'global'} · ${l.details} · IP ${l.ip_address}</div></div><div class="text-[10px] font-mono text-zinc-500">${new Date(l.created_at).toLocaleString()}</div></div>
+      `).join('');
+    }
+
+    // Actions
+    async function runEmployee(id){
+      const res = await fetch(`/api/employees/${id}/run`,{method:'POST',headers:getHeaders()});
+      const data = await res.json();
+      if(res.ok){showToast(`${data.employee.name} ran task · Total ${data.employee.tasks}`, 'success'); loadEmployees(); loadStats();}
+      else showToast(data.error||'Failed','error');
+    }
+    async function handleApproval(id,action){
+      const res = await fetch(`/api/approvals/${id}/action`,{method:'POST',headers:getHeaders(),body:JSON.stringify({action})});
+      const data = await res.json();
+      if(res.ok){showToast(`Approval ${action}ed`, 'success'); loadApprovals(); loadPosts(); loadStats();}
+      else showToast(data.error||'Failed','error');
+    }
+    async function createPost(){
+      const title = document.getElementById('newPostTitle').value;
+      const content = document.getElementById('newPostContent').value;
+      const platform = document.getElementById('newPostPlatform').value;
+      const workspace_id = document.getElementById('newPostWorkspace').value || null;
+      if(!title||!content){showToast('Title and content required','error'); return}
+      const payload = {title,content,platform,status:'draft',author_id:2, workspace_id: workspace_id?parseInt(workspace_id):null};
+      if(currentTenant) payload.client_id = currentTenant.id;
+      const res = await fetch('/api/posts',{method:'POST',headers:getHeaders(),body:JSON.stringify(payload)});
+      if(res.ok){document.getElementById('newPostTitle').value=''; document.getElementById('newPostContent').value=''; showToast('Draft created','success'); loadPosts(); loadStats();}
+      else{const d=await res.json(); showToast(d.error||'Failed','error');}
+    }
+    async function runRepurpose(){
+      const source = document.getElementById('repurposeSource').value;
+      if(!source){showToast('Paste content first','error'); return}
+      document.getElementById('repurposeResult').innerHTML = '<div class="text-zinc-400 animate-pulse">Repurposing with Leo Thorne (AI Repurposing Specialist)... Tenant: '+(currentTenant?currentTenant.name:'Master')+'</div>';
+      const res = await fetch('/api/repurpose',{method:'POST',headers:getHeaders(),body:JSON.stringify({source})});
+      const data = await res.json();
+      if(!res.ok){document.getElementById('repurposeResult').innerHTML = `<div class="text-red-400">${data.error}</div>`; return}
+      document.getElementById('repurposeResult').innerHTML = `
+        <div class="space-y-4 text-left"><div><div class="text-xs font-mono text-zinc-500 uppercase mb-1">LinkedIn Post</div><div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-xs text-zinc-300">${data.linkedin}</div></div><div><div class="text-xs font-mono text-zinc-500 uppercase mb-1">Instagram (${data.instagram.length})</div><div class="space-y-1">${data.instagram.map(t=>`<div class="p-2 rounded-lg bg-zinc-950 border border-zinc-800 text-xs text-zinc-400">${t}</div>`).join('')}</div></div><div><div class="text-xs font-mono text-zinc-500 uppercase mb-1">X Tweets (${data.x.length})</div><div class="space-y-1">${data.x.map(t=>`<div class="p-2 rounded-lg bg-zinc-950 border border-zinc-800 text-xs text-zinc-400">${t}</div>`).join('')}</div></div><div><div class="text-xs font-mono text-zinc-500 uppercase mb-1">Viral Hooks (${data.hooks.length})</div><div class="grid grid-cols-2 gap-1">${data.hooks.map(h=>`<div class="p-2 rounded-lg bg-zinc-950 border border-zinc-800 text-[11px] text-zinc-400">${h}</div>`).join('')}</div></div><div class="pt-2 text-[11px] font-mono text-emerald-400">✓ ${data.total_assets} assets generated · Tenant: ${currentTenant?currentTenant.name:'Master'}</div></div>
+      `;
+      loadPosts(); loadStats();
+    }
+    async function toggleAuto(id){await fetch(`/api/automations/${id}/toggle`,{method:'POST',headers:getHeaders()}); loadAutomations();}
+    async function replyInbox(id){const reply=prompt('Enter reply (Brand DNA will be enforced):'); if(!reply) return; await fetch(`/api/inbox/${id}/reply`,{method:'POST',headers:getHeaders(),body:JSON.stringify({response:reply})}); loadInbox(); showToast('Reply sent','success');}
+    function runPrompt(){document.getElementById('repurposeSource').value = "Create next week's LinkedIn and Instagram content for my business - SIPRA Marketing helps agencies automate social media with AI employees"; switchTab('repurpose'); setTimeout(()=>runRepurpose(),300);}
+    async function handleSearch(q){
+      if(!q||q.length<2){document.getElementById('searchResults').innerHTML='<div class="p-4 text-xs text-zinc-500">Type to search employees, posts, leads... Tenant-aware</div>'; return}
+      let url = `/api/search?q=${encodeURIComponent(q)}`;
+      if(currentTenant) url += `&tenant=${currentTenant.slug}`;
+      const results = await fetchJSON(url);
+      const container = document.getElementById('searchResults');
+      if(!results||results.length===0){container.innerHTML='<div class="p-4 text-xs text-zinc-500">No results</div>'; return}
+      container.innerHTML = results.map(r=>`<button onclick="switchTab('${r.url}'); closeSearch()" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-zinc-800 text-left"><span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-400 flex items-center justify-center text-xs">${r.type[0].toUpperCase()}</span><div><div class="text-sm text-white">${r.title}</div><div class="text-[11px] text-zinc-500">${r.subtitle}</div></div></button>`).join('');
+    }
+    function editTenant(id){showToast('Edit tenant modal — use Agency Hub API PUT /api/tenants/'+id,'info'); switchTab('agency');}
+
+    function switchTab(tab){
+      document.querySelectorAll('.tab-content').forEach(el=>el.classList.add('hidden'));
+      const target = document.getElementById('tab-'+tab);
+      if(target) target.classList.remove('hidden');
+      document.querySelectorAll('.tab-link').forEach(el=>{el.classList.remove('bg-zinc-900','text-white','border','border-zinc-800'); el.classList.add('text-zinc-400'); if(el.dataset.tab===tab){el.classList.add('bg-zinc-900','text-white'); el.classList.remove('text-zinc-400');}});
+      if(tab==='workforce') loadEmployees();
+      if(tab==='studio') loadPosts();
+      if(tab==='leads') loadLeads();
+      if(tab==='approvals') loadApprovals();
+      if(tab==='social') loadSocial();
+      if(tab==='inbox') loadInbox();
+      if(tab==='automations') loadAutomations();
+      if(tab==='brand') loadBrand();
+      if(tab==='agency') loadTenants();
+      if(tab==='workspaces') loadWorkspaces();
+      if(tab==='clients') loadClientUsers();
+      if(tab==='invites') loadInvites();
+      if(tab==='calendar') loadPosts();
+      if(tab==='analytics') loadAnalytics();
+      if(tab==='audit') loadAudit();
+    }
+
+    async function handleLaunchDashboard(){
+      const ok = await checkAuth();
+      if(!ok){openAuth('login'); return}
+      showDashboard();
+    }
+    function showDashboard(){
+      document.getElementById('landingView').classList.add('hidden');
+      document.getElementById('dashboardView').classList.remove('hidden');
+      document.getElementById('dashboardView').classList.add('flex');
+      window.scrollTo(0,0);
+      showToast(`Dashboard Launched · Tenant: ${currentTenant?currentTenant.name:'Master'} · ${currentUser?currentUser.role:''}`, 'success');
+      loadStats(); loadEmployees(); loadLeads(); loadApprovals(); loadPosts(); loadTenants();
+    }
+    function showLanding(){
+      document.getElementById('dashboardView').classList.add('hidden');
+      document.getElementById('dashboardView').classList.remove('flex');
+      document.getElementById('landingView').classList.remove('hidden');
+      window.scrollTo(0,0);
+    }
+    function openSearch(){document.getElementById('commandPalette').classList.remove('hidden'); setTimeout(()=>document.getElementById('searchInput').focus(),50); document.getElementById('searchResults').innerHTML='<div class="p-4 text-xs text-zinc-500">Type to search... Tenant-aware search</div>';}
+    function closeSearch(){document.getElementById('commandPalette').classList.add('hidden');}
+    function openOnboarding(){document.getElementById('onboardingModal').classList.remove('hidden');}
+    function closeOnboarding(){document.getElementById('onboardingModal').classList.add('hidden');}
+    function showToast(msg,type){
+      const container = document.getElementById('toastContainer') || (()=>{const d=document.createElement('div');d.id='toastContainer';d.className='fixed bottom-4 right-4 z-50 space-y-2 max-w-sm pointer-events-none';document.body.appendChild(d);return d;})();
+      const el=document.createElement('div');
+      el.className=`p-3.5 rounded-xl border shadow-xl flex items-start gap-2.5 text-xs pointer-events-auto ${type==='success'?'bg-emerald-950/95 border-emerald-700/80 text-emerald-100':'bg-zinc-900/95 border-zinc-700 text-zinc-100'}`;
+      el.innerHTML=`<span class="shrink-0 mt-0.5">${type==='success'?'✓':'•'}</span><div class="flex-1 leading-snug">${msg}</div><button onclick="this.parentElement.remove()" class="text-zinc-400 hover:text-white p-0.5">✕</button>`;
+      container.appendChild(el);
+      setTimeout(()=>el.remove(),4000);
+    }
+    window.addEventListener('keydown', (e)=>{
+      if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='k'){e.preventDefault();openSearch();}
+      if(e.key==='Escape'){closeSearch();closeOnboarding();closeTenantSwitcher();closeCreateTenantModal();closeCreateWorkspaceModal();closeInviteModal();}
+    });
+    // Color picker sync
+    document.getElementById('newTenantColor')?.addEventListener('input', (e)=>{document.getElementById('newTenantColorText').value=e.target.value;});
+    document.getElementById('newTenantColorText')?.addEventListener('input', (e)=>{document.getElementById('newTenantColor').value=e.target.value;});
+    document.getElementById('newTenantName')?.addEventListener('input', (e)=>{const slug=e.target.value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,50); document.getElementById('newTenantSlug').value=slug;});
+
+    window.addEventListener('DOMContentLoaded', async ()=>{
+      parseUrl();
+      const isAuth = await checkAuth();
+      if(!isAuth){
+        // show landing but auth modal after 1s for demo
+        setTimeout(()=>{if(!currentUser) openAuth('login');}, 800);
+      }
+      loadStats(); loadEmployees(); loadLeads(); loadApprovals(); loadTenants();
+      fetch('/api/health').then(r=>r.json()).then(d=>{console.log('Health',d); document.getElementById('dashboardDbIndicator').innerHTML=`<span class="w-1 h-1 rounded-full bg-emerald-400"></span>DB: ${d.tenants} tenants · ${d.users} users · ${d.workspaces} ws · ${d.employees} emp`;});
+    });
+  </script>
+
+  <!-- Onboarding Modal -->
+  <div id="onboardingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeOnboarding()"></div>
+    <div class="relative w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl p-6">
+      <div class="flex items-center justify-between mb-6"><h3 class="text-sm font-semibold text-white">7-Step Onboarding Wizard — Multi-Tenant</h3><button onclick="closeOnboarding()" class="w-7 h-7 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white">✕</button></div>
+      <div class="space-y-4">
+        <div class="flex gap-3"><div class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">1</div><div><div class="text-sm text-white font-medium">Auth Setup — Owner + Client Users</div><div class="text-xs text-zinc-500">users table with password_hash, api_token, client_id FK, roles: owner/admin/agency_owner/client_admin/client_user</div></div></div>
+        <div class="flex gap-3"><div class="w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 flex items-center justify-center text-xs">2</div><div><div class="text-sm text-zinc-400">Create Tenants — White-Label Portals</div><div class="text-xs text-zinc-600">agency_clients with slug, custom_domain, color_primary, logo, hide_sipra_branding, /portal/:slug</div></div></div>
+        <div class="flex gap-3"><div class="w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 flex items-center justify-center text-xs">3</div><div><div class="text-sm text-zinc-400">Workspaces + Tenant Isolation</div><div class="text-xs text-zinc-600">workspaces table per tenant, all tables have client_id FK, filtered by X-Tenant-Slug or ?tenant=</div></div></div>
+        <div class="flex gap-3"><div class="w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 flex items-center justify-center text-xs">4</div><div><div class="text-sm text-zinc-400">Invite Client Users</div><div class="text-xs text-zinc-600">invitations table with token, /invite/:token, auto-assign client_id and role</div></div></div>
+        <div class="pt-4"><button onclick="handleLaunchDashboard(); closeOnboarding()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold transition">Start Onboarding →</button></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
